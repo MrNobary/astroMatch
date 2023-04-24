@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import styled from "styled-components";
+import './index.css'
+import { ScreenApp } from "./Pages/ScreenApp/screenApp";
 
 function App() {
+
+  const clearMatchs = () => {
+    axios.put('https://us-central1-missao-newton.cloudfunctions.net/astroMatch/:Enzo-Machado-Moreira/clear')
+    .then((res) => {
+      alert('Matches Deletados')
+    })
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <WebApp>
+      <ScreenApp />
+      <button onClick={clearMatchs}>Clear Matches</button>
+    </WebApp>
   );
 }
 
 export default App;
+
+const WebApp = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 42px;
+
+  height: 100vh;
+  background-color: #6099CB;
+`
